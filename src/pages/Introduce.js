@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import images from "../data/Image";
 import Dropdown from "../components/Dropdown";
+import { useNavigate } from "react-router-dom";
 
 const Introduce = () => {
   const difficulty = ["easy", "medium", "hard"];
   const [difficultyChange, setDifficultyChange] = useState("");
 
-  console.log(difficultyChange);
+  const navigate = useNavigate();
+
+  const TOTAL_QUESTIONS = 10;
+
+  const startQuiz = () => {
+    if (difficultyChange) {
+      navigate(`/quiz/${difficultyChange}/${TOTAL_QUESTIONS}`);
+    }
+  };
+
+  // console.log(difficultyChange);
   return (
     <div
       className="w-100 vh-100 d-flex align-items-center justify-content-center"
@@ -23,7 +34,9 @@ const Introduce = () => {
       >
         <img src={images.quiz_time} alt="" width={100} />
         <Dropdown data={difficulty} setDifficultyChange={setDifficultyChange} />
-        <div className="btn btn-success">Teste Basla</div>
+        <div onClick={startQuiz} className="btn btn-success">
+          Teste Basla
+        </div>
       </div>
     </div>
   );
